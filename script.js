@@ -1,6 +1,7 @@
 const inputBox = document.getElementById("input-box");
 const listContainer = document.getElementById("list-container");
 
+// Task management code
 function addTask() {
     if (inputBox.value === '') {
         alert("You must write something!");
@@ -54,3 +55,21 @@ inputBox.addEventListener("keypress", function(e) {
 });
 
 showTask();
+
+
+let gifs = document.querySelectorAll('.gif');
+let currentIndex = 0;
+
+function showNextGif() {
+    // Remove the active class from the current gif
+    gifs[currentIndex].classList.remove('active');
+    
+    // Update the index and ensure it loops back around when it reaches the end
+    currentIndex = (currentIndex + 1) % gifs.length;
+    
+    // Add the active class to the next gif
+    gifs[currentIndex].classList.add('active');
+}
+
+// Start the GIF slideshow (change GIF every 3 seconds)
+setInterval(showNextGif, 3000);

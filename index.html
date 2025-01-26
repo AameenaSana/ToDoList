@@ -1,29 +1,39 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>TO-DO LIST APP</title>
-        <link rel="stylesheet" href="style.css">
-    </head>
-    <body>
-        <div class="container">
-            <div class="todo-app">
-                <h2><img src="Images/icon.png.png" alt="" width="100" height="75">TO-DO LIST</h2>
-                <div class="row">
-                    <input type="text" id="input-box" placeholder="Enter your Task" style="font-size: 20px;">
-                    <button onclick="addTask()"> 
-                        ADD
-                    </button>
-                </div>
-                <ul id="list-container"> 
-                    <!-- <li class="checked">Task 1</li>
-                    <li>Task 2</li>
-                    <li>Task 3</li> -->
-                </ul>
-            </div>
-
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TO-DO LIST APP</title>
+    <link rel="stylesheet" href="style.css"> <!-- Link to the external CSS file -->
+</head>
+<body>
+    <div class="container">
+        <!-- GIF Slideshow Section (Above the todo box) -->
+        <div class="gif-container">
+            <img src="gifs/cat-donut.gif" alt="GIF 1" class="gif" />
+            <img src="gifs/cat-facingback-tail.gif" alt="GIF 2" class="gif" />
+            <img src="gifs/cat-on-shelf.gif" alt="GIF 3" class="gif" />
+            <img src="gifs/cat-playing-wool.gif" alt="GIF 4" class="gif" />
+            <img src="gifs/cat-sleeping.gif" alt="GIF 5" class="gif" />
+            <img src="gifs/cat-staring-at-us.gif" alt="GIF 6" class="gif" />
         </div>
 
-<script src="script.js"></script>
-    </body>
+        <!-- To-Do List App -->
+        <div class="todo-app">
+            <h2><img src="Images/icon.png.png" alt="" width="100" height="75">TO-DO LIST</h2>
+            
+            <!-- To-Do List Input -->
+            <div class="row">
+                <input type="text" id="input-box" placeholder="Enter your Task" style="font-size: 20px;">
+                <button onclick="addTask()">ADD</button>
+            </div>
+
+            <!-- To-Do List -->
+            <ul id="list-container"> 
+                <!-- Tasks will be added here -->
+            </ul>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
 </html>
