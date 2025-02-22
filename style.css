@@ -22,9 +22,10 @@
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -1; /* Ensure the GIFs are behind the todo list */
-    overflow: hidden;
+    z-index: 2; /* Ensure the GIFs are on top */
+    pointer-events: none; /* Prevent interference with to-do list interactions */
 }
+
 
 /* GIF styling */
 .gif {
@@ -34,7 +35,6 @@
     opacity: 0;
     transition: opacity 1s ease-in-out;
 }
-
 /* Active GIF will be visible */
 .gif.active {
     opacity: 1;
@@ -49,7 +49,7 @@
     border-radius: 10px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
     position: relative;
-    z-index: 1; /* Ensure the todo box stays above the GIFs */
+    z-index: 3; /* Ensure the todo box stays above the GIFs */
 }
 
 /* Header styling */
@@ -129,7 +129,7 @@ ul li::before {
     height: 28px;
     width: 28px;
     border-radius: 50%;
-    background-image: url(Images/unchecked.png.jpeg);
+    background-image: url(Images/unchecked.jpeg);
     background-size: cover;
     background-position: center;
     top: 12px;
@@ -142,7 +142,7 @@ ul li.checked {
 }
 
 ul li.checked::before {
-    background-image: url(Images/checked.png.jpeg);
+    background-image: url(Images/checked.jpeg);
 }
 
 ul li span {
@@ -151,7 +151,7 @@ ul li span {
     top: 5px;
     width: 40px;
     height: 40px;
-    font-size: 22px;
+    font-size: 35px;
     color: #000000;
     line-height: 45px;
     text-align: center;
@@ -181,3 +181,24 @@ ul li span:hover {
         margin-left: 0;
     }
 }
+
+.gif-container {
+    position: absolute; /* Keeps it inside .container */
+    top: -70px; /* Moves it up above the box */
+    left: 50%;
+    transform: translateX(-50%); /* Centers it */
+    width: 350px; /* Adjust width if needed */
+    text-align: center;
+    z-index: 4; /* Stays on top */
+}
+
+.gif {
+    width: 100%;
+    height: auto;
+    display: none; /* Initially hidden */
+}
+
+.gif.active {
+    display: block; /* Shows only the active GIF */
+}
+

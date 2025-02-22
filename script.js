@@ -1,3 +1,5 @@
+
+
 const inputBox = document.getElementById("input-box");
 const listContainer = document.getElementById("list-container");
 
@@ -34,10 +36,11 @@ function saveData() {
 }
 
 function showTask() {
-    listContainer.innerHTML = localStorage.getItem("data") || "";
-    if (listContainer.innerHTML === "") {
-        listContainer.innerHTML = "<p style='color: #888; text-align: center;'>No tasks available</p>";
+    let savedData = localStorage.getItem("data");
+    if (savedData && savedData.includes("No tasks available")) {
+        savedData = ""; // Remove the unwanted message
     }
+    listContainer.innerHTML = savedData || "";
 }
 
 // Clear all tasks
@@ -61,15 +64,17 @@ let gifs = document.querySelectorAll('.gif');
 let currentIndex = 0;
 
 function showNextGif() {
-    // Remove the active class from the current gif
     gifs[currentIndex].classList.remove('active');
-    
-    // Update the index and ensure it loops back around when it reaches the end
     currentIndex = (currentIndex + 1) % gifs.length;
-    
-    // Add the active class to the next gif
     gifs[currentIndex].classList.add('active');
 }
-
-// Start the GIF slideshow (change GIF every 3 seconds)
 setInterval(showNextGif, 3000);
+if (gifs.length > 0) {
+    setInterval(showNextGif, 12000);
+}
+function showNextGif() {
+    console.log("Switching GIFs..."); // Debugging
+    gifs[currentIndex].classList.remove('active');
+    currentIndex = (currentIndex + 1) % gifs.length;
+    gifs[currentIndex].classList.add('active');
+}
