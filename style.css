@@ -16,29 +16,35 @@
 }
 
 /* GIF container - place it above the todo box */
+/* Ensure GIF container is above the to-do list */
 .gif-container {
     position: absolute;
-    top: 0;
-    left: 0;
+    top: -20px; /* Adjust to move GIFs down slightly */
+    left: 50%;
+    transform: translateX(-50%); /* Center horizontally */
     width: 100%;
     height: 100%;
-    z-index: 2; /* Ensure the GIFs are on top */
-    pointer-events: none; /* Prevent interference with to-do list interactions */
+    z-index: -1; /* Ensure the GIFs are behind the todo list */
+    overflow: hidden;
 }
 
 
-/* GIF styling */
+/* GIF Styling */
 .gif {
-    position: absolute;
-    width: 100%;
-    height: 100%;
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;  /* Fix: Added missing semicolon */
     opacity: 0;
     transition: opacity 1s ease-in-out;
+    position: absolute;
 }
+
 /* Active GIF will be visible */
 .gif.active {
     opacity: 1;
+    position: absolute;
 }
+
 
 /* To-Do List App */
 .todo-app {
@@ -112,7 +118,7 @@ ul {
 
 ul li {
     list-style: none;
-    font-size: 20px;
+    font-size: 22px;
     padding: 12px 8px 12px 50px;
     user-select: none;
     cursor: pointer;
@@ -151,54 +157,51 @@ ul li span {
     top: 5px;
     width: 40px;
     height: 40px;
-    font-size: 35px;
+    font-size: 22px;
     color: #000000;
-    line-height: 45px;
+    line-height: 50px;
     text-align: center;
     border-radius: 50%;
     cursor: pointer;
+
 }
 
 ul li span:hover {
     background: #cbd2dc;
 }
+.clear-btn {
+    display: block; /* Ensures it's visible */
+    margin: 10px auto; /* Centers it below the input */
+    padding: -5px 20px;
+    background: #000000;
+    color: #ffffff;
+    font-size: 20px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
 
 /* Responsive design */
 @media (max-width: 768px) {
     .row {
-        flex-direction: column;
-        align-items: stretch;
+        flex-wrap: nowrap; /* Prevents wrapping */
+        justify-content: space-between; /* Ensures proper spacing */
+        padding: 5px 10px; /* Adjust padding */
     }
 
     input {
         font-size: 14px;
         padding: 10px;
+        flex: 1; /* Ensures input takes available space */
+        min-width: 0; /* Prevents it from forcing button out */
     }
 
     button {
         font-size: 14px;
         padding: 10px 15px;
-        margin-left: 0;
+        white-space: nowrap; /* Prevents button text from breaking */
+        margin-left: 5px; /* Adds spacing */
     }
 }
-
-.gif-container {
-    position: absolute; /* Keeps it inside .container */
-    top: -70px; /* Moves it up above the box */
-    left: 50%;
-    transform: translateX(-50%); /* Centers it */
-    width: 350px; /* Adjust width if needed */
-    text-align: center;
-    z-index: 4; /* Stays on top */
-}
-
-.gif {
-    width: 100%;
-    height: auto;
-    display: none; /* Initially hidden */
-}
-
-.gif.active {
-    display: block; /* Shows only the active GIF */
-}
-

@@ -36,11 +36,15 @@ function saveData() {
 }
 
 function showTask() {
+<<<<<<< HEAD
     let savedData = localStorage.getItem("data");
     if (savedData && savedData.includes("No tasks available")) {
         savedData = ""; // Remove the unwanted message
     }
     listContainer.innerHTML = savedData || "";
+=======
+    listContainer.innerHTML = localStorage.getItem("data") || "";
+>>>>>>> 061a4ae (fixed the responsiveness)
 }
 
 // Clear all tasks
@@ -59,10 +63,17 @@ inputBox.addEventListener("keypress", function(e) {
 
 showTask();
 
+// GIF Slideshow Logic
+document.addEventListener("DOMContentLoaded", function () {
+    const gifs = document.querySelectorAll(".gif");
+    let currentIndex = 0;
 
-let gifs = document.querySelectorAll('.gif');
-let currentIndex = 0;
+    function showNextGif() {
+        gifs.forEach((gif, index) => {
+            gif.classList.remove("active");
+        });
 
+<<<<<<< HEAD
 function showNextGif() {
     gifs[currentIndex].classList.remove('active');
     currentIndex = (currentIndex + 1) % gifs.length;
@@ -78,3 +89,13 @@ function showNextGif() {
     currentIndex = (currentIndex + 1) % gifs.length;
     gifs[currentIndex].classList.add('active');
 }
+=======
+        gifs[currentIndex].classList.add("active");
+
+        currentIndex = (currentIndex + 1) % gifs.length;
+    }
+
+    showNextGif(); // Show first GIF
+    setInterval(showNextGif, 9000); // Change GIF every 9 seconds
+});
+>>>>>>> 061a4ae (fixed the responsiveness)
