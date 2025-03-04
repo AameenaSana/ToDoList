@@ -63,18 +63,13 @@ showTask();
 let gifs = document.querySelectorAll('.gif');
 let currentIndex = 0;
 
-function showNextGif() {
-    gifs[currentIndex].classList.remove('active');
-    currentIndex = (currentIndex + 1) % gifs.length;
-    gifs[currentIndex].classList.add('active');
-}
-setInterval(showNextGif, 3000);
 if (gifs.length > 0) {
-    setInterval(showNextGif, 12000);
-}
-function showNextGif() {
-    console.log("Switching GIFs..."); // Debugging
-    gifs[currentIndex].classList.remove('active');
-    currentIndex = (currentIndex + 1) % gifs.length;
-    gifs[currentIndex].classList.add('active');
+    function showNextGif() {
+        console.log("Switching GIFs..."); // Debugging
+        gifs[currentIndex].classList.remove('active');
+        currentIndex = (currentIndex + 1) % gifs.length;
+        gifs[currentIndex].classList.add('active');
+    }
+
+    setInterval(showNextGif, 25000);
 }
