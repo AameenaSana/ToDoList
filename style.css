@@ -26,7 +26,6 @@
     pointer-events: none; /* Prevent interference with to-do list interactions */
 }
 
-
 /* GIF styling */
 .gif {
     position: absolute;
@@ -113,6 +112,7 @@ ul {
 ul li {
     list-style: none;
     font-size: 20px;
+    font-family: 'Poppins', sans-serif;
     padding: 12px 8px 12px 50px;
     user-select: none;
     cursor: pointer;
@@ -163,11 +163,18 @@ ul li span:hover {
     background: #cbd2dc;
 }
 
+/* Center the Clear All button */
+#clear-all {
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
     .row {
-        flex-direction: column;
-        align-items: stretch;
+        flex-direction: row;
+        justify-content: space-between;
     }
 
     input {
@@ -178,7 +185,7 @@ ul li span:hover {
     button {
         font-size: 14px;
         padding: 10px 15px;
-        margin-left: 0;
+        margin-left: 10px;
     }
 }
 
@@ -201,4 +208,3 @@ ul li span:hover {
 .gif.active {
     display: block; /* Shows only the active GIF */
 }
-
