@@ -208,3 +208,66 @@ ul li span:hover {
 .gif.active {
     display: block; /* Shows only the active GIF */
 }
+/* Timer-specific styles */
+.timer {
+    position: absolute;
+    right: 60px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+    font-weight: 500;
+    color: #000000;
+    background: transparent;
+    padding: 4px 10px;
+    border-radius: 15px;
+    font-family: 'Courier New', monospace;
+    transition: all 0.3s ease;
+}
+
+.timer-expired {
+    color: #ff0000 !important;
+    font-weight: 700;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+/* Mobile timer positioning */
+@media (max-width: 768px) {
+    .timer {
+        position: static;
+        display: block;
+        margin-top: 8px;
+        margin-left: 35px;
+        background: none;
+        padding: 0;
+    }
+}
+/* Update timer display */
+.timer {
+    display: flex;
+    gap: 3px;
+    white-space: nowrap;
+    flex-wrap: nowrap;
+    padding-right: 65px;
+    font-size: 15px;
+    font-weight: 650px;
+}
+
+/* Mobile adjustment */
+@media (max-width: 768px) {
+    .timer {
+        display: inline-flex;
+        margin-left: 8px;
+        background: none;
+        padding: 0;
+    }
+}
+.timer span {
+    font-weight: 700; /* Makes numbers extra bold */
+    color: #333;      /* Darker color for numbers */
+}

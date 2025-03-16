@@ -1,124 +1,93 @@
-import { startTaskTimers } from './time.js';
+import { startTaskTimers, formatTime } from './time.js';
 
-let todoList = [];
-document.addEventListener("DOMContentLoaded", function () {
-    console.log("DOM fully loaded!");
+let todoList = JSON.parse(localStorage.getItem("todoList")) || [];
 
+document.addEventListener("DOMContentLoaded", () => {
+    // 1. Get ALL elements first
     const inputBox = document.getElementById("input-box");
     const timeInput = document.getElementById("timeInput");
-    const addTaskBtn = document.getElementById("addTaskBtn");
+    const addButton = document.getElementById("addButton");
     const listContainer = document.getElementById("list-container");
+    const clearAllButton = document.getElementById("clear-all");
 
-    console.log("inputBox:", inputBox);
-    console.log("timeInput:", timeInput);
-    console.log("addTaskBtn:", addTaskBtn);
-    console.log("listContainer:", listContainer);
+    // 2. Add event listeners properly
+    addButton.addEventListener("click", addTask);
+    clearAllButton.addEventListener("click", clearAll);
+    inputBox.addEventListener("keypress", handleEnter);
 
-   
+    // 3. Initialize app
+    showTasks();
+    startTaskTimers(todoList);
+
     function addTask() {
         const taskText = inputBox.value.trim();
-        const timeLimit = parseInt(timeInput.value); // Time in minutes
+        const timeLimit = parseInt(timeInput.value);
 
-        if (taskText === '') {
-            alert("You must write something!");
+        if (!taskText || isNaN(timeLimit)) {
+            alert("Please fill both fields!");
             return;
         }
 
-        if ([...listContainer.children].some(li => li.textContent.slice(0, -1) === taskText)) {
-            alert("Task already exists!");
-            return;
-        }
+        const newTask = {
+            id: Date.now(),
+            text: taskText,
+            deadline: Date.now() + timeLimit * 60000,
+            checked: false
+        };
 
-        // Create task element
-        let li = document.createElement("li");
-        li.innerHTML = `${taskText} <span>\u00d7</span>`;
-        
-        listContainer.appendChild(li);
-
-        // Save to localStorage
+        todoList.push(newTask);
         saveData();
-
-        // Add the task with a timer
-        if (!isNaN(timeLimit) && timeLimit > 0) {
-            const task = {
-                id: Date.now(),
-                text: taskText,
-                deadline: new Date().getTime() + timeLimit * 60000, // Convert minutes to ms
-            };
-            todoList.push(task);
-            renderTask(task);
-            startTaskTimers([task]); // Start countdown
-        }
+        showTasks();
+        startTaskTimers([newTask]);
 
         inputBox.value = "";
-        timeInput.value = ""; // Clear inputs
+        timeInput.value = "";
     }
 
-    function renderTask(task) {
-        const taskList = document.getElementById("taskList");
-        const taskElement = document.createElement("div");
-        taskElement.id = `task-${task.id}`;
-        taskElement.innerHTML = `
-            <p>${task.text}</p>
-            <span id="timer-${task.id}"></span>
-        `;
-        taskList.appendChild(taskElement);
+    function handleEnter(e) {
+        if (e.key === "Enter") addTask();
     }
 
-    // Attach addTask to button click
-    addTaskBtn.addEventListener("click", addTask);
+    function showTasks() {
+        listContainer.innerHTML = todoList.map(task => `
+            <li data-task-id="${task.id}" class="${task.checked ? 'checked' : ''}">
+                ${task.text}
+                <span class="timer" id="timer-${task.id}">
+                    ${formatTime(task.deadline - Date.now())}
+                </span>
+                <span class="delete-btn">×</span>
+            </li>
+        `).join("");
+    }
 
     function saveData() {
-        localStorage.setItem("data", listContainer.innerHTML);
+        localStorage.setItem("todoList", JSON.stringify(todoList));
     }
 
-    function showTask() {
-        let savedData = localStorage.getItem("data");
-        if (savedData && savedData.includes("No tasks available")) {
-            savedData = ""; // Remove the unwanted message
-        }
-        listContainer.innerHTML = savedData || "";
-    }
-
-    showTask();
-
-    listContainer.addEventListener("click", function(e) {
-        if (e.target.tagName === "LI") {
-            e.target.classList.toggle("checked");
+    function clearAll() {
+        if (confirm("Clear all tasks?")) {
+            todoList = [];
             saveData();
-        } else if (e.target.tagName === "SPAN") {
-            e.target.parentElement.remove();
+            showTasks();
+        }
+    }
+
+    // Task interactions
+    listContainer.addEventListener("click", (e) => {
+        const li = e.target.closest("li");
+        if (!li) return;
+
+        if (e.target.classList.contains("delete-btn")) {
+            const taskId = parseInt(li.dataset.taskId);
+            todoList = todoList.filter(task => task.id !== taskId);
+            li.remove();
+            saveData();
+        } else {
+            const taskId = parseInt(li.dataset.taskId);
+            const task = todoList.find(t => t.id === taskId);
+            task.checked = !task.checked;
+            li.classList.toggle("checked");
             saveData();
         }
     });
-
-    document.getElementById("clear-all").addEventListener("click", function() {
-        if (confirm("Are you sure you want to clear all tasks?")) {
-            listContainer.innerHTML = "";
-            saveData();
-        }
-    });
-
-    inputBox.addEventListener("keypress", function(e) {
-        if (e.key === "Enter") {
-            addTask();
-        }
-    });
-
-    // GIF Slideshow
-    let gifs = document.querySelectorAll('.gif');
-    let currentIndex = 0;
-
-    if (gifs.length > 0) {
-        function showNextGif() {
-            console.log("Switching GIFs...");
-            gifs[currentIndex].classList.remove('active');
-            currentIndex = (currentIndex + 1) % gifs.length;
-            gifs[currentIndex].classList.add('active');
-        }
-
-        setInterval(showNextGif, 25000);
-    }
-
-    window.addTask = addTask;
 });
