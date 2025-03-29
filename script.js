@@ -91,3 +91,32 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
+
+//Voice Feature
+// Check if Speech Recognition is supported
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+const recognition = new SpeechRecognition();
+recognition.lang = "en-US"; // Set language
+recognition.continuous = false; // Stops after one result
+
+// When speech is recognized
+recognition.onresult = (event) => {
+    const speechToText = event.results[0][0].transcript;
+    document.getElementById("input-box").value = speechToText;
+};
+
+document.getElementById("startVoice").addEventListener("click", () => {
+    if (recognition.running) return; // Prevent multiple starts
+    recognition.start();
+});
+
+// Function to add task to list
+function addTask() {
+    const taskText = document.getElementById("input-box").value;
+    if (taskText.trim() !== "") {
+        const li = document.createElement("li");
+        li.textContent = taskText;
+        document.getElementById("taskList").appendChild(li);
+        document.getElementById("input-box").value = ""; // Clear input after adding
+    }
+}

@@ -102,6 +102,11 @@ button {
     cursor: pointer;
     border-radius: 30px;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease-in-out;
+}
+
+button:hover{
+    background: #333333;
 }
 
 ul {
@@ -271,3 +276,43 @@ ul li span:hover {
     font-weight: 700; /* Makes numbers extra bold */
     color: #333;      /* Darker color for numbers */
 }
+
+/* Button container to ensure spacing */
+.button-container {
+    display: flex;
+    gap: 10px; /* Adds space between buttons */
+}
+
+/* Speak Button */
+#startVoice, #addTask {
+    flex-shrink: 0;
+    border: none;
+    outline: none;
+    padding: 12px 20px;
+    background: #000000;
+    color: #ffffff;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 30px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease-in-out;
+}
+
+/* Hover Effect */
+#startVoice:hover, #addTask:hover {
+    background: #333333;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .button-container {
+        flex-direction: column;
+        gap: 5px; /* Reduce gap for smaller screens */
+    }
+
+    #startVoice, #addTask {
+        width: 100%; /* Make buttons full width */
+        font-size: 18px;
+    }
+}
+
