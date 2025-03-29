@@ -192,6 +192,7 @@ ul li span:hover {
         padding: 10px 15px;
         margin-left: 10px;
     }
+
 }
 
 .gif-container {
@@ -311,8 +312,43 @@ ul li span:hover {
     }
 
     #startVoice, #addTask {
-        width: 100%; /* Make buttons full width */
-        font-size: 18px;
+        
+            font-size: 14px;
+            padding: 10px 15px;
+            margin-left: 10px;
+    
     }
 }
+
+.button-container {
+    display: flex;
+    justify-content: space-between; /* Puts buttons on the same line */
+    align-items: center;
+    width: 100%; /* Ensures full width */
+    margin-top: 10px; /* Add some spacing */
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+#startVoice, #addTask {
+    font-size: 14px;
+    padding: 10px 15px;
+    border: none;
+    outline: none;
+    background: #000;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 20px;
+    flex: 1; /* Makes buttons responsive */
+    max-width: 45%; /* Ensures they stay side by side */
+    flex: 1;
+}
+
+@media (max-width: 500px) {
+    .button-container {
+        flex-direction: row !important; /* Forces buttons to stay in a row */
+        justify-content: center; /* Centers the buttons */
+    }
+}
+
 
