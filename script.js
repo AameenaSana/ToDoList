@@ -3,19 +3,16 @@ import { startTaskTimers, formatTime } from './time.js';
 let todoList = JSON.parse(localStorage.getItem("todoList")) || [];
 
 document.addEventListener("DOMContentLoaded", () => {
-    // 1. Get ALL elements first
     const inputBox = document.getElementById("input-box");
     const timeInput = document.getElementById("timeInput");
-    const addButton = document.getElementById("addButton");
+    const addButton = document.getElementById("addTask"); // Fixed
     const listContainer = document.getElementById("list-container");
     const clearAllButton = document.getElementById("clear-all");
 
-    // 2. Add event listeners properly
-    addButton.addEventListener("click", addTask);
+    addButton.addEventListener("click", addTask); // Use correct reference
     clearAllButton.addEventListener("click", clearAll);
     inputBox.addEventListener("keypress", handleEnter);
 
-    // 3. Initialize app
     showTasks();
     startTaskTimers(todoList);
 
@@ -110,13 +107,3 @@ document.getElementById("startVoice").addEventListener("click", () => {
     recognition.start();
 });
 
-// Function to add task to list
-function addTask() {
-    const taskText = document.getElementById("input-box").value;
-    if (taskText.trim() !== "") {
-        const li = document.createElement("li");
-        li.textContent = taskText;
-        document.getElementById("taskList").appendChild(li);
-        document.getElementById("input-box").value = ""; // Clear input after adding
-    }
-}
