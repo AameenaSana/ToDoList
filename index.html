@@ -4,6 +4,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>TO-DO LIST APP</title>
     <link rel="stylesheet" href="style.css"> <!-- Link to the external CSS file -->
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.css" rel="stylesheet" />
+
 </head>
 <body>
     <div class="container">
@@ -16,6 +18,8 @@
             <img src="gifs/cat-sleeping.gif" alt="GIF 5" class="gif" />
             <img src="gifs/cat-staring-at-us.gif" alt="GIF 6" class="gif" />
         </div>
+        <div id='calendar'></div>
+
     
         <!-- To-Do List App -->
         <div class="todo-app">
@@ -38,8 +42,13 @@
             <button id="clear-all">Clear All</button>
         </div>
     </div>
-    
+   
+
 
     <script type="module" src="script.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.js"></script>
+    <script src="script.js" type="module"></script>
+
 </body>
 </html>

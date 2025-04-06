@@ -107,3 +107,25 @@ document.getElementById("startVoice").addEventListener("click", () => {
     recognition.start();
 });
 
+//CALENDAR
+
+document.addEventListener('DOMContentLoaded', function () {
+    var calendarEl = document.getElementById('calendar');
+  
+    const myTasks = [
+      { title: "Buy groceries", dueDate: "2025-04-08" },
+      { title: "Finish project", dueDate: "2025-04-12" }
+    ];
+  
+    const events = myTasks.map(task => ({
+      title: task.title,
+      start: task.dueDate
+    }));
+  
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+      initialView: 'dayGridMonth',
+      events: events // 👈 inject it here directly
+    });
+  
+    calendar.render();
+  });
